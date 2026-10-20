@@ -1,6 +1,6 @@
 # Duckアドレス生成ツール
 
-DuckDuckGo Email Protection の「Duckアドレスから新しいメールを送る」際に使う宛先形式を、ブラウザ内で組み立てる非公式の静的ツールです。公開ページには、使い方・生成例・注意事項を掲載し、ページタイトル／説明文、OGP・Twitterカード用メタデータ、canonical URL、WebApplication構造化データを設定しています。
+DuckDuckGo Email ProtectionのDuckアドレスは、普段はメールの受信用として使うことが多いアドレスです。このツールは、自分からDuckアドレスを使ってメールを送りたいときに、相手のアドレスと自分のDuckアドレスから送信用の宛先形式を簡単に作るための非公式ツールです。公開ページには、使う場面・使い方・生成例・注意事項を掲載し、ページタイトル／説明文、OGP・Twitterカード用メタデータ、canonical URL、WebApplication構造化データを設定しています。
 
 ## 使い方
 
