@@ -1,6 +1,6 @@
 # Duckアドレス生成ツール
 
-DuckDuckGo Email Protection の「Duckアドレスから新しいメールを送る」際に使う宛先形式を、ブラウザ内で組み立てる非公式の静的ツールです。
+DuckDuckGo Email Protection の「Duckアドレスから新しいメールを送る」際に使う宛先形式を、ブラウザ内で組み立てる非公式の静的ツールです。公開ページには、使い方・生成例・注意事項を掲載し、ページタイトル／説明文、OGP・Twitterカード用メタデータ、canonical URL、WebApplication構造化データを設定しています。
 
 ## 使い方
 
@@ -28,6 +28,13 @@ DuckDuckGo Email Protection の「Duckアドレスから新しいメールを送
 - Gmailやメールアプリを開く操作を実行した場合、宛先は選択されたメールサービス／アプリに渡されます。これはツール自体が入力内容を収集・送信することとは異なります。
 - 公開後はブラウザの開発者ツール（Network）で、ページ読み込み時に外部通信がないことを確認してください。静的ホスティング事業者が通常のアクセスログを扱う場合がある点は、ホスティング事業者のポリシーに従います。
 
+## SEO・公開設定
+
+- ページタイトルとdescriptionを設定し、検索結果でツールの目的が伝わるようにしています。
+- OGP／Twitterカード用メタデータ、canonical URL、`WebApplication`構造化データを設定しています。
+- `robots.txt` と `sitemap.xml` を用意しています。検索エンジンへの登録・掲載順位は保証されません。公開後はURLを確認し、必要に応じてGoogle Search Consoleなどでサイトマップを送信してください。
+- ページ下部に開発者名（GitHubアカウント `teruluce`）とソースコードへのリンクを小さく表示し、運営主体と実装を確認できるようにしています。
+
 ## 公式仕様の出典
 
 DuckDuckGo Help Pages, “How do I compose a new email from my personal Duck Address?”  
@@ -53,6 +60,7 @@ MIT License。詳細は `LICENSE` を参照してください。
 - [x] 異常系：`@` のない送信先、`@duck.com` 以外のDuck側ドメイン、不正文字を拒否するロジックを確認
 - [x] Gmail URLの宛先が `encodeURIComponent` でエンコードされ、`@` が `%40` になることを確認
 - [x] CSP、外部スクリプト／スタイル／フォント参照、保存領域、解析コードがないことを静的確認
+- [x] SEOメタデータ、canonical、構造化データ、robots.txt、sitemap.xmlを追加
 - [ ] 公開先でDevToolsのNetworkを開き、ページ表示時に外部通信がないことを実機確認
 - [ ] PC、iPhone、AndroidでGmail／標準メールアプリ／コピー動作を実機確認
 
