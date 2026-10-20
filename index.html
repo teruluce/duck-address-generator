@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
-  <meta name="theme-color" content="#f6f7f3">
+  <meta name="theme-color" content="#F3F9FE">
   <meta name="description" content="受信用として使うことの多いDuckアドレスで、自分からメールを送りたいときに。送信先と自分のDuckアドレスから宛先を簡単に作成する非公式ツールです。">
   <meta name="robots" content="index,follow">
   <meta name="application-name" content="Duckアドレス生成ツール">
@@ -37,16 +37,16 @@
   <style>
     :root {
       color-scheme: light;
-      --bg: #f6f7f3;
+      --bg: #F3F9FE;
       --surface: #fff;
-      --ink: #202820;
-      --muted: #5d685d;
-      --accent: #315c45;
-      --accent-hover: #244a36;
-      --line: #dce4da;
-      --soft: #edf3ec;
+      --ink: #20364A;
+      --muted: #53697B;
+      --accent: #2878B5;
+      --accent-hover: #1E6092;
+      --line: #D8E7F2;
+      --soft: #EAF6FF;
       --error: #a12e2e;
-      --focus: #a7c6ad;
+      --focus: #8ECDF5;
       --radius: 18px;
     }
     * { box-sizing: border-box; }
@@ -107,12 +107,12 @@
       width: 100%;
       min-height: 50px;
       padding: 12px 14px;
-      border: 1px solid #cbd6ca;
+      border: 1px solid #C9DCEB;
       border-radius: 11px;
       color: var(--ink);
       background: #fff;
     }
-    input::placeholder { color: #7d897d; opacity: 1; }
+    input::placeholder { color: #71879A; opacity: 1; }
     input:focus-visible, button:focus-visible, a:focus-visible {
       outline: 3px solid var(--focus);
       outline-offset: 3px;
@@ -145,7 +145,7 @@
     .result {
       margin-top: 24px;
       padding: 18px;
-      border: 1px solid #cbdcca;
+      border: 1px solid #C9E4F8;
       border-radius: 14px;
       background: var(--soft);
     }
@@ -163,10 +163,10 @@
     .result .primary { flex-basis: 100%; }
     .status { min-height: 1.6em; margin: 12px 0 0; color: var(--muted); font-size: .88rem; }
     .status.error { color: var(--error); }
-    .privacy { display: flex; gap: 12px; margin-top: 14px; padding: 16px; background: #eef1e9; }
+    .privacy { display: flex; gap: 12px; margin-top: 14px; padding: 16px; background: #F1F8FD; }
     .privacy-mark { flex: 0 0 auto; color: var(--accent); font-weight: 800; }
     .privacy strong { display: block; margin-bottom: 3px; }
-    .privacy p { margin: 0; color: #4f5b50; font-size: .85rem; }
+    .privacy p { margin: 0; color: #526879; font-size: .85rem; }
     .guide { margin-top: 14px; padding: clamp(20px, 5vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
     .guide h2 { margin-top: 0; }
     .guide h3 { margin: 20px 0 6px; font-size: 1rem; }
