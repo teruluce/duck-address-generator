@@ -6,7 +6,7 @@
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
   <meta name="theme-color" content="#f6f7f3">
-  <meta name="description" content="DuckDuckGo Email ProtectionのDuckアドレスからメールを送るための宛先を簡単に作成。入力例・使い方・仕組みを解説。入力内容は外部送信・保存されない非公式ツールです。">
+  <meta name="description" content="受信用として使うことの多いDuckアドレスで、自分からメールを送りたいときに。送信先と自分のDuckアドレスから宛先を簡単に作成する非公式ツールです。">
   <meta name="robots" content="index,follow">
   <meta name="application-name" content="Duckアドレス生成ツール">
   <link rel="canonical" href="https://teruluce.github.io/duck-address-generator/">
@@ -14,13 +14,13 @@
   <meta property="og:site_name" content="Duckアドレス生成ツール">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Duckアドレス生成ツール">
-  <meta name="twitter:description" content="Duckアドレスからメールを送るための宛先を、使い方と仕組みの説明付きで簡単に作成。">
+  <meta name="twitter:description" content="受信用として使うことの多いDuckアドレスで、自分からメールを送りたいときに。送信先と自分のDuckアドレスから宛先を簡単に作成。">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Duckアドレス生成ツール">
   <meta property="og:description" content="Duckアドレスから新しいメールを送るための宛先を、ブラウザ内で生成します。">
   <meta property="og:locale" content="ja_JP">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <title>Duckアドレス生成ツール｜使い方・宛先作成</title>
+  <title>Duckアドレス送信補助ツール｜自分のDuckアドレスからメールを送る</title>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -193,12 +193,12 @@
     <header>
       <p class="eyebrow">EMAIL ADDRESS UTILITY</p>
       <h1>Duckアドレス生成ツール</h1>
-      <p class="intro">DuckDuckGo Email ProtectionのDuckアドレスを使って相手にメールを送る際の、宛先アドレスを組み立てるツールです。相手のメールアドレスと自分のDuckアドレスを入力するだけで、コピーやメール作成画面への移動に使える形式を作成できます。</p>
+      <p class="intro">Duckアドレスは、普段使っているメールアドレスを相手に直接知らせずにメールを受信するためによく使われます。このツールは、自分からDuckアドレスを使ってメールを送りたいときに、送信に使う宛先を簡単に作成するためのものです。</p>
     </header>
 
     <main>
       <h2>アドレスを生成</h2>
-      <p class="section-description">入力内容はこのページ内のJavaScriptで処理します。メールの送信そのものは行いません。</p>
+      <p class="section-description">送信先と自分のDuckアドレスを入力して宛先を作成し、Gmailなどのメールアプリで本文を作成して送信します。このツール自体がメールを送ることはありません。</p>
 
       <form id="generator-form" novalidate>
         <div class="field">
@@ -246,8 +246,8 @@
     </aside>
 
     <section class="guide" aria-labelledby="how-heading">
-      <h2 id="how-heading">使い方・仕組み</h2>
-      <p>Duckアドレスから新しいメールを送るときは、相手のアドレスを専用の宛先形式に整えて使います。このツールは、その文字列を入力内容から自動で作成します。</p>
+      <h2 id="how-heading">どんなときに使うツール？</h2>
+      <p>Duckアドレスは主にメールの受信に使うものですが、「自分からもDuckアドレスを使ってメールを送りたい」という場面もあります。その際は、相手のメールアドレスを専用の宛先形式に整える必要があります。このツールは、その宛先を手軽に作成するためのものです。</p>
       <h3>使い方</h3>
       <ol>
         <li>「送信先」に、メールを送りたい相手のアドレスを入力します。</li>
@@ -256,9 +256,9 @@
       </ol>
       <h3>生成例</h3>
       <p><code>hoge@gmail.com</code> と <code>my-duck</code> を入力すると、<code>hoge_at_gmail.com_my-duck@duck.com</code> を生成します。相手のアドレスの <code>@</code> を <code>_at_</code> に置き換え、続けて自分のDuckアドレスを連結する形式です。</p>
-      <h3>利用前に知っておきたいこと</h3>
+      <h3>使うときのポイント</h3>
       <ul>
-        <li>このツールが行うのは宛先文字列の生成です。メールの送信・配信や、DuckDuckGoのサービスが正常に動作することを保証するものではありません。</li>
+        <li>このツールは送信先の宛先を作る補助ツールです。生成後はGmailなどのメールアプリで本文を作成し、自分で送信してください。メールの送信・配信そのものは行いません。</li>
         <li>「Gmailで送信画面を開く」はGmailの作成画面を開きます。「標準のメールアプリで開く」は端末に設定されたメールアプリを呼び出します。実際に送信する前に、宛先を確認してください。</li>
         <li>Duckアドレスの仕様や利用条件は変更される場合があります。最新の案内は<a href="https://duckduckgo.com/duckduckgo-help-pages/email-protection/duck-addresses/how-do-i-compose-a-new-email" target="_blank" rel="noopener noreferrer">DuckDuckGo公式ヘルプ</a>で確認できます。</li>
       </ul>
