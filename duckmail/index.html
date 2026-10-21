@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src 'self'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#F3F9FE">
+  <meta name="description" content="受信用として使うことの多いDuckアドレスで、自分からメールを送りたいときに。送信先と自分のDuckアドレスから宛先を簡単に作成する非公式ツールです。">
+  <meta name="robots" content="index,follow">
+  <meta name="application-name" content="Duckアドレス生成ツール">
+  <link rel="canonical" href="https://teruluce.github.io/duck-address-generator/duckmail/">
+  <meta property="og:url" content="https://teruluce.github.io/duck-address-generator/duckmail/">
+  <meta property="og:site_name" content="Duckアドレス生成ツール">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Duckアドレス生成ツール">
+  <meta name="twitter:description" content="受信用として使うことの多いDuckアドレスで、自分からメールを送りたいときに。送信先と自分のDuckアドレスから宛先を簡単に作成。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Duckアドレス生成ツール">
+  <meta property="og:description" content="Duckアドレスから新しいメールを送るための宛先を、ブラウザ内で生成します。">
+  <meta property="og:locale" content="ja_JP">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <title>Duckアドレス送信補助ツール｜自分のDuckアドレスからメールを送る</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Duckアドレス生成ツール",
+    "url": "https://teruluce.github.io/duck-address-generator/duckmail/",
+    "description": "DuckDuckGo Email ProtectionのDuckアドレスからメールを送るための宛先をブラウザ内で生成する非公式ツールです。",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "ja",
+    "isAccessibleForFree": true
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #F3F9FE;
+      --surface: #fff;
+      --ink: #20364A;
+      --muted: #53697B;
+      --accent: #2878B5;
+      --accent-hover: #1E6092;
+      --line: #D8E7F2;
+      --soft: #EAF6FF;
+      --error: #a12e2e;
+      --focus: #8ECDF5;
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 22px 14px 28px;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN",
+        "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+    button, input { font: inherit; }
+    .shell { width: 100%; max-width: 680px; margin: 0 auto; }
+    .masthead {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: .78rem;
+      letter-spacing: .08em;
+    }
+    .masthead::before {
+      content: "";
+      display: inline-block;
+      width: 8px; height: 8px;
+      margin: 0 8px 1px 0;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    header, main, .privacy {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+    header { padding: clamp(22px, 6vw, 36px); }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 7vw, 2.6rem);
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+    .intro { margin: 14px 0 0; color: var(--muted); }
+    main { margin-top: 14px; padding: clamp(20px, 5vw, 30px); }
+    h2 { margin: 0 0 5px; font-size: 1.25rem; }
+    .section-description { margin: 0 0 22px; color: var(--muted); font-size: .92rem; }
+    .field { margin-top: 18px; }
+    label { display: block; margin-bottom: 7px; font-weight: 650; }
+    input {
+      display: block;
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px;
+      border: 1px solid #C9DCEB;
+      border-radius: 11px;
+      color: var(--ink);
+      background: #fff;
+    }
+    input::placeholder { color: #71879A; opacity: 1; }
+    input:focus-visible, button:focus-visible, a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+    .hint { margin: 6px 0 0; color: var(--muted); font-size: .8rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    button, .button-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 47px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .primary {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+    .primary:hover { background: var(--accent-hover); }
+    .secondary:hover, .button-link:hover { background: var(--soft); }
+    #generate-button { flex: 1 1 180px; }
+    .result {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid #C9E4F8;
+      border-radius: 14px;
+      background: var(--soft);
+    }
+    .result[hidden] { display: none; }
+    .result-label {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: .75rem;
+      font-weight: 750;
+      letter-spacing: .08em;
+    }
+    .result-value { margin: 0; font-weight: 700; user-select: text; }
+    .result .actions { margin-top: 16px; }
+    .result .button-link { flex: 1 1 170px; }
+    .result .primary { flex-basis: 100%; }
+    .status { min-height: 1.6em; margin: 12px 0 0; color: var(--muted); font-size: .88rem; }
+    .status.error { color: var(--error); }
+    .privacy { display: flex; gap: 12px; margin-top: 14px; padding: 16px; background: #F1F8FD; }
+    .privacy-mark { flex: 0 0 auto; color: var(--accent); font-weight: 800; }
+    .privacy strong { display: block; margin-bottom: 3px; }
+    .privacy p { margin: 0; color: #526879; font-size: .85rem; }
+    .guide { margin-top: 14px; padding: clamp(20px, 5vw, 28px); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .guide h2 { margin-top: 0; }
+    .guide h3 { margin: 20px 0 6px; font-size: 1rem; }
+    .guide p, .guide li { color: var(--muted); font-size: .92rem; }
+    .guide p { margin: 8px 0; }
+    .guide ol { padding-left: 1.4rem; }
+    .guide code { padding: 2px 5px; border-radius: 5px; background: var(--soft); color: var(--ink); overflow-wrap: anywhere; }
+    .developer { margin-top: 9px; font-size: .72rem; }
+    .developer a { color: inherit; text-underline-offset: 2px; }
+    footer { padding: 18px 8px 0; color: var(--muted); text-align: center; font-size: .78rem; }
+    @media (max-width: 420px) {
+      body { padding: 16px 11px 22px; }
+      .actions > button, .actions > .button-link { width: 100%; }
+      #generate-button { flex-basis: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <p class="masthead"><a href="../">Tools Personal</a>　/　ブラウザ内で動作するシンプルなツール</p>
+    <header>
+      <p class="eyebrow">EMAIL ADDRESS UTILITY</p>
+      <h1>Duckアドレス生成ツール</h1>
+      <p class="intro">Duckアドレスは、普段使っているメールアドレスを相手に直接知らせずにメールを受信するためによく使われます。このツールは、自分からDuckアドレスを使ってメールを送りたいときに、送信に使う宛先を簡単に作成するためのものです。</p>
+    </header>
+
+    <main>
+      <h2>アドレスを生成</h2>
+      <p class="section-description">送信先と自分のDuckアドレスを入力して宛先を作成し、Gmailなどのメールアプリで本文を作成して送信します。このツール自体がメールを送ることはありません。</p>
+
+      <form id="generator-form" novalidate>
+        <div class="field">
+          <label for="recipient">1. 送信先（相手のメールアドレス）</label>
+          <input id="recipient" name="recipient" type="email" inputmode="email"
+            autocomplete="off" autocapitalize="none" spellcheck="false"
+            placeholder="hoge@gmail.com" aria-describedby="recipient-hint" required>
+          <p class="hint" id="recipient-hint">例：hoge@gmail.com</p>
+        </div>
+
+        <div class="field">
+          <label for="duck-address">2. 自分のDuckアドレス</label>
+          <input id="duck-address" name="duck-address" type="text"
+            autocomplete="off" autocapitalize="none" spellcheck="false"
+            placeholder="my-duck または my-duck@duck.com"
+            aria-describedby="duck-hint" required>
+          <p class="hint" id="duck-hint">「my-duck」または「my-duck@duck.com」の形式で入力できます。</p>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="generate-button" type="submit">アドレスを生成</button>
+          <button class="secondary" type="reset">クリア</button>
+        </div>
+      </form>
+
+      <section class="result" id="result" aria-labelledby="result-heading" hidden>
+        <p class="result-label" id="result-heading">生成されたアドレス</p>
+        <p class="result-value" id="result-value"></p>
+        <div class="actions">
+          <a class="button-link primary" id="gmail-link" href="#" target="_blank" rel="noopener noreferrer">Gmailで送信画面を開く</a>
+          <a class="button-link" id="mailto-link" href="#">標準のメールアプリで開く</a>
+          <button class="secondary" id="copy-button" type="button">結果をコピー</button>
+        </div>
+      </section>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </main>
+
+    <aside class="privacy" aria-label="プライバシーについて">
+      <span class="privacy-mark" aria-hidden="true">●</span>
+      <div>
+        <strong>プライバシーと免責事項</strong>
+        <p>入力内容を外部サーバーへ送信したり、ブラウザに保存したりしません。アクセス解析、外部ライブラリ、CDN、外部フォントも使用していません。メールアプリを開く操作は、選択したメールサービスまたは端末のメールアプリに移動します。</p>
+        <p style="margin-top:8px">本ツールは非公式の独立したツールであり、DuckDuckGoとは提携・関係していません。DuckDuckGoおよびDuckアドレスは各権利者の名称・サービスです。</p>
+      </div>
+    </aside>
+
+    <section class="guide" aria-labelledby="how-heading">
+      <h2 id="how-heading">どんなときに使うツール？</h2>
+      <p>Duckアドレスは主にメールの受信に使うものですが、「自分からもDuckアドレスを使ってメールを送りたい」という場面もあります。その際は、相手のメールアドレスを専用の宛先形式に整える必要があります。このツールは、その宛先を手軽に作成するためのものです。</p>
+      <h3>使い方</h3>
+      <ol>
+        <li>「送信先」に、メールを送りたい相手のアドレスを入力します。</li>
+        <li>「自分のDuckアドレス」に、Duckアドレスのユーザー名（例：<code>my-duck</code>）または完全なアドレス（例：<code>my-duck@duck.com</code>）を入力します。</li>
+        <li>「アドレスを生成」を押して、表示された結果をコピーするか、Gmail／端末のメールアプリを開きます。</li>
+      </ol>
+      <h3>生成例</h3>
+      <p><code>hoge@gmail.com</code> と <code>my-duck</code> を入力すると、<code>hoge_at_gmail.com_my-duck@duck.com</code> を生成します。相手のアドレスの <code>@</code> を <code>_at_</code> に置き換え、続けて自分のDuckアドレスを連結する形式です。</p>
+      <h3>使うときのポイント</h3>
+      <ul>
+        <li>このツールは送信先の宛先を作る補助ツールです。生成後はGmailなどのメールアプリで本文を作成し、自分で送信してください。メールの送信・配信そのものは行いません。</li>
+        <li>「Gmailで送信画面を開く」はGmailの作成画面を開きます。「標準のメールアプリで開く」は端末に設定されたメールアプリを呼び出します。実際に送信する前に、宛先を確認してください。</li>
+        <li>Duckアドレスの仕様や利用条件は変更される場合があります。最新の案内は<a href="https://duckduckgo.com/duckduckgo-help-pages/email-protection/duck-addresses/how-do-i-compose-a-new-email" target="_blank" rel="noopener noreferrer">DuckDuckGo公式ヘルプ</a>で確認できます。</li>
+      </ul>
+    </section>
+
+    <footer>
+      非公式の独立ツール · 入力内容は送信・保存されません
+      <div class="developer">開発者：<a href="https://github.com/teruluce/duck-address-generator" rel="noopener noreferrer">teruluce（個人開発）</a> · <a href="https://github.com/teruluce/duck-address-generator" rel="noopener noreferrer">ソースコード</a></div>
+    </footer>
+  </div>
+
+  <script>
+    "use strict";
+
+    const form = document.getElementById("generator-form");
+    const recipientInput = document.getElementById("recipient");
+    const duckInput = document.getElementById("duck-address");
+    const resultSection = document.getElementById("result");
+    const resultValue = document.getElementById("result-value");
+    const status = document.getElementById("status");
+    const gmailLink = document.getElementById("gmail-link");
+    const mailtoLink = document.getElementById("mailto-link");
+    const copyButton = document.getElementById("copy-button");
+    const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+    let hasGenerated = false;
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function normalizeDuckAddress(value) {
+      const address = value.trim();
+      if (!address) return null;
+
+      if (address.includes("@")) {
+        if (!/^[^\s@]+@duck\.com$/.test(address)) return null;
+        return address;
+      }
+
+      if (!/^[a-zA-Z0-9._+-]+$/.test(address)) return null;
+      return address + "@duck.com";
+    }
+
+    function generateAddress(recipient, duckAddress) {
+      return recipient.trim().replace("@", "_at_") + "_" + duckAddress;
+    }
+
+    function updateMailLinks(address) {
+      const encoded = encodeURIComponent(address);
+      gmailLink.href = "https://mail.google.com/mail/?view=cm&fs=1&to=" + encoded;
+      gmailLink.dataset.appUrl = "googlegmail:///co?to=" + encoded;
+      const separator = address.lastIndexOf("@");
+      const localPart = address.slice(0, separator);
+      const domainPart = address.slice(separator + 1);
+      mailtoLink.href = "mailto:" + encodeURIComponent(localPart) + "@" + encodeURIComponent(domainPart);
+    }
+
+    function showStatus(message, isError = false) {
+      status.textContent = message;
+      status.classList.toggle("error", isError);
+    }
+
+    function hideResult() {
+      resultSection.hidden = true;
+      resultValue.textContent = "";
+      gmailLink.href = "#";
+      delete gmailLink.dataset.appUrl;
+      mailtoLink.href = "#";
+    }
+
+    function renderCurrentInputs() {
+      const recipient = recipientInput.value.trim();
+      const duckAddress = normalizeDuckAddress(duckInput.value);
+
+      if (!recipient || !duckInput.value.trim() || !isValidEmail(recipient) || !duckAddress) {
+        hideResult();
+        showStatus("入力内容を確認してください。正しい形式になると結果を再表示します。", true);
+        return false;
+      }
+
+      const address = generateAddress(recipient, duckAddress);
+      resultValue.textContent = address;
+      updateMailLinks(address);
+      resultSection.hidden = false;
+      showStatus("アドレスを生成しました。必要な操作を選んでください。");
+      return true;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const recipient = recipientInput.value.trim();
+      const duckAddress = normalizeDuckAddress(duckInput.value);
+
+      if (!recipient || !duckInput.value.trim()) {
+        hideResult();
+        hasGenerated = false;
+        showStatus("2つの項目を入力してください。", true);
+        (!recipient ? recipientInput : duckInput).focus();
+        return;
+      }
+      if (!isValidEmail(recipient)) {
+        hideResult();
+        hasGenerated = false;
+        showStatus("送信先メールアドレスの形式を確認してください。", true);
+        recipientInput.focus();
+        return;
+      }
+      if (!duckAddress) {
+        hideResult();
+        hasGenerated = false;
+        showStatus("Duckアドレスを確認してください。@付きの場合は @duck.com のみ使用できます。", true);
+        duckInput.focus();
+        return;
+      }
+
+      hasGenerated = true;
+      renderCurrentInputs();
+    });
+
+    recipientInput.addEventListener("input", function () {
+      if (hasGenerated) renderCurrentInputs();
+    });
+    duckInput.addEventListener("input", function () {
+      if (hasGenerated) renderCurrentInputs();
+    });
+
+    gmailLink.addEventListener("click", function (event) {
+      if (!isIOS || !gmailLink.dataset.appUrl || resultSection.hidden) return;
+      event.preventDefault();
+
+      const appUrl = gmailLink.dataset.appUrl;
+      const webUrl = gmailLink.href;
+      let leftPage = false;
+
+      function onVisibilityChange() {
+        if (document.hidden) leftPage = true;
+      }
+
+      document.addEventListener("visibilitychange", onVisibilityChange);
+      window.location.href = appUrl;
+
+      window.setTimeout(function () {
+        document.removeEventListener("visibilitychange", onVisibilityChange);
+        if (!leftPage && !document.hidden) window.location.href = webUrl;
+      }, 1200);
+    });
+
+    async function fallbackCopy(text) {
+      const temporary = document.createElement("textarea");
+      temporary.value = text;
+      temporary.setAttribute("readonly", "");
+      temporary.style.position = "fixed";
+      temporary.style.opacity = "0";
+      document.body.appendChild(temporary);
+      temporary.select();
+      temporary.setSelectionRange(0, temporary.value.length);
+      const copied = document.execCommand("copy");
+      temporary.remove();
+      if (!copied) throw new Error("Copy command failed");
+    }
+
+    copyButton.addEventListener("click", async function () {
+      const text = resultValue.textContent;
+      if (!text || resultSection.hidden) {
+        showStatus("先に有効なアドレスを生成してください。", true);
+        return;
+      }
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          await fallbackCopy(text);
+        }
+        showStatus("生成したアドレスをコピーしました。");
+      } catch (_) {
+        try {
+          await fallbackCopy(text);
+          showStatus("生成したアドレスをコピーしました。");
+        } catch (_) {
+          showStatus("自動コピーできませんでした。結果を選択して手動でコピーしてください。", true);
+        }
+      }
+    });
+
+    form.addEventListener("reset", function () {
+      hasGenerated = false;
+      hideResult();
+      showStatus("");
+    });
+  </script>
+</body>
+</html>

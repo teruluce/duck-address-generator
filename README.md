@@ -1,6 +1,17 @@
-# Duckアドレス生成ツール
+# Tools Personal
 
-DuckDuckGo Email ProtectionのDuckアドレスは、普段はメールの受信用として使うことが多いアドレスです。このツールは、自分からDuckアドレスを使ってメールを送りたいときに、相手のアドレスと自分のDuckアドレスから送信用の宛先形式を簡単に作るための非公式ツールです。公開ページには、使う場面・使い方・生成例・注意事項を掲載し、ページタイトル／説明文、OGP・Twitterカード用メタデータ、canonical URL、WebApplication構造化データを設定しています。
+個人向けのシンプルなWebツールをまとめるサイトです。トップページから各ツールへ移動できます。
+
+## 公開ページ
+
+- ツール一覧: https://teruluce.github.io/duck-address-generator/
+- Duckアドレス生成ツール: https://teruluce.github.io/duck-address-generator/duckmail/
+
+---
+
+## Duckアドレス生成ツール
+
+DuckDuckGo Email ProtectionのDuckアドレスは、普段はメールの受信用として使うことが多いアドレスです。このツールは、自分からDuckアドレスを使ってメールを送りたいときに、相手のアドレスと自分のDuckアドレスから送信用の宛先形式を簡単に作るための非公式ツールです。ツールページには、使う場面・使い方・生成例・注意事項を掲載し、ページタイトル／説明文、OGP・Twitterカード用メタデータ、canonical URL、WebApplication構造化データを設定しています。
 
 ## 使い方
 
@@ -48,7 +59,7 @@ https://duckduckgo.com/duckduckgo-help-pages/email-protection/duck-addresses/how
 
 ## 公開方法
 
-GitHub Pagesなどの静的ホスティングで公開できます。ビルド手順や外部依存はありません。このツールは個人サイトとは分離した専用リポジトリで管理します。
+GitHub Pagesなどの静的ホスティングで公開できます。ビルド手順や外部依存はありません。トップページはツール一覧、各ツールは独立したサブディレクトリで管理します。
 
 ## License
 
